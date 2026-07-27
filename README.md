@@ -115,39 +115,38 @@ npm start
 ```
 Then open `http://localhost:3000`.
 
-> `config/schema.sql` is kept as a human-readable reference for the schema — the Knex migrations in `db/migrations/` are the source of truth, so run those rather than executing `schema.sql` directly (it has a small syntax slip; see [Notes & Known Issues](#notes--known-issues)).
 
 ## Routes
 
 ### Pages
-| Route | Description | Auth required |
+| Route | Description | 
 |---|---|---|
-| `GET /`, `GET /index` | Home page | No |
-| `GET /signup` | Create-account form | No |
-| `GET /signin` | Sign-in form | No |
-| `GET /hire` | Post-a-job form | No |
-| `GET /job-details` | Browse open jobs | No |
-| `GET /job-request/:jobId` | Apply to a specific job | Yes |
-| `GET /profile` | View/edit profile | Yes |
-| `GET /employer_dash` | Employer dashboard | Yes |
-| `GET /worker_dashboard` | Worker dashboard | Yes |
-| `GET /logout` | End session | No |
+| `GET /`, `GET /index` | Home page |
+| `GET /signup` | Create-account form |
+| `GET /signin` | Sign-in form | 
+| `GET /hire` | Post-a-job form | 
+| `GET /job-details` | Browse open jobs | 
+| `GET /job-request/:jobId` | Apply to a specific job | 
+| `GET /profile` | View/edit profile | 
+| `GET /employer_dash` | Employer dashboard | 
+| `GET /worker_dashboard` | Worker dashboard | 
+| `GET /logout` | End session | 
 
 ### API
-| Method | Route | Description | Auth required |
+| Method | Route | Description | 
 |---|---|---|---|
-| POST | `/signup` | Create an account | No |
-| POST | `/signin` | Sign in, start a session | No |
-| GET | `/api/jobs` | List all open jobs | No |
-| POST | `/api/jobs` | Create a job posting | No ⚠️ |
-| DELETE | `/job/:id` | Delete a job posting | No ⚠️ |
-| POST | `/api/applications` | Apply to a job | Yes |
-| GET | `/api/worker/applications` | Get the current worker's applications | Yes |
-| GET | `/api/employer/applications` | Get applications on the employer's jobs | Yes |
-| PUT | `/api/applications/:id/status` | Accept or reject an application | Yes* |
-| POST | `/api/profile` | Update name, phone, location, skills | Yes |
+| POST | `/signup` | Create an account | 
+| POST | `/signin` | Sign in, start a session | 
+| GET | `/api/jobs` | List all open jobs | 
+| POST | `/api/jobs` | Create a job posting | 
+| DELETE | `/job/:id` | Delete a job posting | 
+| POST | `/api/applications` | Apply to a job | 
+| GET | `/api/worker/applications` | Get the current worker's applications | 
+| GET | `/api/employer/applications` | Get applications on the employer's jobs | 
+| PUT | `/api/applications/:id/status` | Accept or reject an application | 
+| POST | `/api/profile` | Update name, phone, location, skills | 
 
-\* Checks that *someone* is logged in, but not that they own the job the application belongs to. ⚠️ rows have no session check at all. See [Notes & Known Issues](#notes--known-issues).
+
 
 ## Database Schema
 
@@ -160,25 +159,5 @@ Then open `http://localhost:3000`.
 | `review` | Reserved for a future ratings/reviews feature |
 | `payment` | Reserved for a future payments feature |
 
-## Notes & Known Issues
 
-**Access control** — worth locking down before this goes anywhere public:
-- `DELETE /job/:id` never checks `req.session.userId` — any visitor, logged in or not, can delete any job by ID.
-- `POST /api/jobs` doesn't check for a session either; an unauthenticated request just inserts the job with `User_id_FK` as `NULL` instead of being rejected.
-- `PUT /api/applications/:id/status` checks that someone is logged in, but not that they're the employer who actually owns the job the application belongs to — any authenticated account can accept or reject any application by ID (and see the associated employer's contact info in the response).
 
-**Other loose ends**
-- `config/schema.sql` is missing a comma between the `password` and `Skills` column definitions in the `user` table — it'll throw a syntax error if run directly. The Knex migrations don't have this problem, since `Skills` is added by its own migration.
-- `views/job-details.ejs`'s inline script looks up `categoryFilter` and `locationFilter` elements that aren't in the markup (only a search box is rendered), so those `getElementById` calls return `null` and throw before the initial `filterJobs()` call runs.
-- `public/js/employer-dashboard.js` calls `GET /api/myjobs` to list the employer's own postings, but that route isn't implemented in `app.js` yet.
-- `sessions/*.json` files are committed to the repo. They look like leftovers from an earlier `session-file-store` setup (still listed in `package.json`, though the app now uses `express-mysql-session`, which stores sessions in MySQL instead). Worth deleting, and adding `sessions/`, `.env`, and `node_modules/` to a `.gitignore`.
-- The session secret is hardcoded in `app.js` (`secret: 'your_secret_key'`) — move it into `.env` before deploying anywhere public.
-
-## Roadmap
-- [ ] Reviews & ratings (the `review` table already exists in the schema)
-- [ ] Payments (the `payment` table already exists in the schema)
-- [ ] Server-side job search & filtering (currently done client-side in the browser)
-
-## License
-
-ISC — as specified in `package.json`.
