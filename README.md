@@ -6,20 +6,6 @@
 
 ---
 
-## 📑 Contents
-
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Routes & API Endpoints](#-routes--api-endpoints)
-- [Database Schema](#-database-schema)
-- [Notes & Known Issues](#-notes--known-issues)
-- [Roadmap](#-roadmap)
-- [License](#-license)
-
----
-
 ## 🌟 Features
 
 ### For Employers
@@ -59,20 +45,18 @@
 
 ## 📂 Project Structure
 
-```text
-Helply/
-├── app.js                      # Express app: routes, auth, and API endpoints
-├── knexfile.js                 # Knex database configuration
-├── config/
-│   ├── db.js                   # MySQL connection pool
-│   └── schema.sql              # Reference SQL schema
-├── db/migrations/              # Knex migrations (tables & columns)
-├── seeds/                      # Knex seed data (service categories)
-├── public/
-│   ├── css/                    # Stylesheets
-│   └── js/                     # Dashboard client-side logic
-├── views/                      # EJS templates
-└── Documentations/             # Project write-up
 
 
-
+🚀 Getting StartedPrerequisitesNode.js (v18 or higher)A running MySQL or MariaDB server1. Clone and Install DependenciesBashgit clone [https://github.com/niyabraham/Helply.git](https://github.com/niyabraham/Helply.git)
+cd Helply
+npm install
+2. Configure Environment VariablesCreate a .env file in the project root with the following configuration:Code snippetDB_HOST=localhost
+DB_USER=your_mysql_user
+DB_PASSWORD=your_mysql_password
+DB_NAME=helply_db
+PORT=3000
+3. Create the DatabaseKnex migrations manage table creation, but you must create the database instance first:SQLCREATE DATABASE helply_db;
+4. Run Migrations and SeedsBashnpx knex migrate:latest
+npx knex seed:run
+(Note: config/schema.sql is provided as a human-readable reference, but the Knex migrations in db/migrations/ serve as the absolute source of truth.)5. Start the ServerBashnpm start
+Open your browser and navigate to http://localhost:3000.🗺️ Routes & API EndpointsPages (Frontend Views)RouteDescriptionAuth RequiredGET /, GET /indexHome pageNoGET /signupCreate-account formNoGET /signinSign-in formNoGET /hirePost-a-job formNoGET /job-detailsBrowse open jobsNoGET /job-request/:jobIdApply to a specific jobYesGET /profileView/edit profileYesGET /employer_dashEmployer dashboardYesGET /worker_dashboardWorker dashboardYesGET /logoutEnd sessionNoAPI EndpointsMethodRouteDescriptionAuth RequiredPOST/signupCreate an accountNoPOST/signinSign in and start a sessionNoGET/api/jobsList all open jobsNoPOST/api/jobsCreate a job postingNo ⚠️DELETE/job/:idDelete a job postingNo ⚠️POST/api/applicationsApply to a jobYesGET/api/worker/applicationsGet current worker's applicationsYesGET/api/employer/applicationsGet applications on employer's jobsYesPUT/api/applications/:id/statusAccept or reject an applicationYesPOST/api/profileUpdate name, phone, location, skillsYes🗄️ Database Schemauser: Stores user accounts (Name, email, username, phone, location, hashed password, skills).service_category: Stores the six preset job categories.job: Job postings linked to the posting user and category.application: Worker applications linked to a specific job and user.review: Reserved for future ratings/reviews functionality.payment: Reserved for future payment processing integration.
