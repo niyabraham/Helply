@@ -19,9 +19,7 @@ Helply is a full-stack web platform that bridges job seekers and job providers f
 - [Getting Started](#getting-started)
 - [Routes](#routes)
 - [Database Schema](#database-schema)
-- [Notes & Known Issues](#notes--known-issues)
-- [Roadmap](#roadmap)
-- [License](#license)
+- 
 
 ## Features
 
