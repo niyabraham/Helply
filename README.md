@@ -43,10 +43,6 @@
 
 ---
 
-## 📂 Project Structure
-
-
-
 🚀 Getting StartedPrerequisitesNode.js (v18 or higher)A running MySQL or MariaDB server1. Clone and Install DependenciesBashgit clone [https://github.com/niyabraham/Helply.git](https://github.com/niyabraham/Helply.git)
 cd Helply
 npm install
