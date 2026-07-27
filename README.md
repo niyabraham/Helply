@@ -42,19 +42,17 @@
 | **Frontend** | HTML, CSS, Vanilla JavaScript |
 
 ---
+🚀 Getting Started
+Prerequisites
+Node.js (v18 or higher)
 
-## 🚀 Getting Started
+A running MySQL or MariaDB server
 
-### Prerequisites
-* Node.js (v18 or higher)
-* A running MySQL or MariaDB server
-
-### 1. Clone and Install Dependencies
-```bash
+1. Clone and Install Dependencies
+Bash
 git clone [https://github.com/niyabraham/Helply.git](https://github.com/niyabraham/Helply.git)
 cd Helply
 npm install
-
 2. Configure Environment Variables
 Create a .env file in the project root with the following configuration:
 
@@ -82,29 +80,47 @@ Open your browser and navigate to http://localhost:3000.
 
 🗺️ Routes & API Endpoints
 Pages (Frontend Views)
-Route	Description	Auth Required
-GET /, GET /index	Home page	No
-GET /signup	Create-account form	No
-GET /signin	Sign-in form	No
-GET /hire	Post-a-job form	No
-GET /job-details	Browse open jobs	No
-GET /job-request/:jobId	Apply to a specific job	Yes
-GET /profile	View/edit profile	Yes
-GET /employer_dash	Employer dashboard	Yes
-GET /worker_dashboard	Worker dashboard	Yes
-GET /logout	End session	No
+GET /, GET /index — Home page (No auth required)
+
+GET /signup — Create-account form (No auth required)
+
+GET /signin — Sign-in form (No auth required)
+
+GET /hire — Post-a-job form (No auth required)
+
+GET /job-details — Browse open jobs (No auth required)
+
+GET /job-request/:jobId — Apply to a specific job (Auth Required)
+
+GET /profile — View/edit profile (Auth Required)
+
+GET /employer_dash — Employer dashboard (Auth Required)
+
+GET /worker_dashboard — Worker dashboard (Auth Required)
+
+GET /logout — End session (No auth required)
+
 API Endpoints
-Method	Route	Description	Auth Required
-POST	/signup	Create an account	No
-POST	/signin	Sign in and start a session	No
-GET	/api/jobs	List all open jobs	No
-POST	/api/jobs	Create a job posting	No ⚠️
-DELETE	/job/:id	Delete a job posting	No ⚠️
-POST	/api/applications	Apply to a job	Yes
-GET	/api/worker/applications	Get current worker's applications	Yes
-GET	/api/employer/applications	Get applications on employer's jobs	Yes
-PUT	/api/applications/:id/status	Accept or reject an application	Yes
-POST	/api/profile	Update name, phone, location, skills	Yes
+POST /signup — Create an account (No auth required)
+
+POST /signin — Sign in and start a session (No auth required)
+
+GET /api/jobs — List all open jobs (No auth required)
+
+POST /api/jobs — Create a job posting (No auth required ⚠️)
+
+DELETE /job/:id — Delete a job posting (No auth required ⚠️)
+
+POST /api/applications — Apply to a job (Auth Required)
+
+GET /api/worker/applications — Get current worker's applications (Auth Required)
+
+GET /api/employer/applications — Get applications on employer's jobs (Auth Required)
+
+PUT /api/applications/:id/status — Accept or reject an application (Auth Required)
+
+POST /api/profile — Update name, phone, location, skills (Auth Required)
+
 🗄️ Database Schema
 user: Stores user accounts (Name, email, username, phone, location, hashed password, skills).
 
@@ -116,4 +132,4 @@ application: Worker applications linked to a specific job and user.
 
 review: Reserved for future ratings/reviews functionality.
 
-payment: Reserved for future payment processing integration.
+payment: Reserved for future payme
