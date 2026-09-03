@@ -117,33 +117,32 @@ Then open `http://localhost:3000`.
 ## Routes
 
 ### Pages
-| Route | Description | 
-|---|---|---|
+| Route | Description |
+|---|---|
 | `GET /`, `GET /index` | Home page |
 | `GET /signup` | Create-account form |
-| `GET /signin` | Sign-in form | 
-| `GET /hire` | Post-a-job form | 
-| `GET /job-details` | Browse open jobs | 
-| `GET /job-request/:jobId` | Apply to a specific job | 
-| `GET /profile` | View/edit profile | 
-| `GET /employer_dash` | Employer dashboard | 
-| `GET /worker_dashboard` | Worker dashboard | 
-| `GET /logout` | End session | 
+| `GET /signin` | Sign-in form |
+| `GET /hire` | Post-a-job form |
+| `GET /job-details` | Browse open jobs |
+| `GET /job-request/:jobId` | Apply to a specific job |
+| `GET /profile` | View/edit profile |
+| `GET /employer_dash` | Employer dashboard |
+| `GET /worker_dashboard` | Worker dashboard |
+| `GET /logout` | End session |
 
 ### API
-| Method | Route | Description | 
-|---|---|---|---|
-| POST | `/signup` | Create an account | 
-| POST | `/signin` | Sign in, start a session | 
-| GET | `/api/jobs` | List all open jobs | 
-| POST | `/api/jobs` | Create a job posting | 
-| DELETE | `/job/:id` | Delete a job posting | 
-| POST | `/api/applications` | Apply to a job | 
-| GET | `/api/worker/applications` | Get the current worker's applications | 
-| GET | `/api/employer/applications` | Get applications on the employer's jobs | 
-| PUT | `/api/applications/:id/status` | Accept or reject an application | 
-| POST | `/api/profile` | Update name, phone, location, skills | 
-
+| Method | Route | Description |
+|---|---|---|
+| POST | `/signup` | Create an account |
+| POST | `/signin` | Sign in, start a session |
+| GET | `/api/jobs` | List all open jobs |
+| POST | `/api/jobs` | Create a job posting |
+| DELETE | `/job/:id` | Delete a job posting |
+| POST | `/api/applications` | Apply to a job |
+| GET | `/api/worker/applications` | Get the current worker's applications |
+| GET | `/api/employer/applications` | Get applications on the employer's jobs |
+| PUT | `/api/applications/:id/status` | Accept or reject an application |
+| POST | `/api/profile` | Update name, phone, location, skills |
 
 
 ## Database Schema
